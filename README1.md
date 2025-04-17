@@ -13,6 +13,8 @@ This project contains automated Cypress tests for verifying various props and be
 │   └── cypress/
 │       └── e2e/
 │           └── cometchat_conversations.cy.js
+│   └── components/
+│       └── testConversations.tsx
 ├── package.json
 ├── vite.config.js
 ├── ...
