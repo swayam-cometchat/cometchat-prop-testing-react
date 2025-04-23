@@ -1,26 +1,19 @@
 import React, { act } from "react";
-import { CometChatConversations, CometChatUsers, SelectionMode  } from "@cometchat/chat-uikit-react";
-import CometChat, { User } from "@cometchat/chat-sdk-javascript";
+import { CometChatUsers, SelectionMode  } from "@cometchat/chat-uikit-react";
+import { CometChat }from "@cometchat/chat-sdk-javascript";
 const getSearchParams = () => {
   const params = new URLSearchParams(window.location.search);
 
   const selectionModeParam = params.get("selectionMode");
-    const headerViewParam = params.get("headerView");
-   // const conversationWith = params.get("Nacny Grace");
-  //const conversationWithParam = params.get("conversationWith");
-  const conversationWithUser = params.get("conversationWithUser");
-   const activeUserParam = params.get("activeUser");
-
+   
+   const chatUser = params.get("chatUser");
+  
   return {
     hideUserStatus: params.get("hideUserStatus") === "true",
     hideUsertype: params.get("hideUsertype") === "true",
     hideSearch: params.get("hideSearch") === "true",
-    showSectionHeader: params.get("showSectionHeader") === "true",   
     headerView: params.get("headerView") === "true",
-    searchKeyword: params.get("searchKeyword") || "Alice",
-    activeUser: activeUserParam === "true" ? { id: "cometchat-uid-3", name: "Nancy Grace" } : undefined,
-    
-
+    chatUser: chatUser,
     selectionMode:
       selectionModeParam === "multiple"
         ? SelectionMode.multiple
@@ -31,9 +24,16 @@ const getSearchParams = () => {
     activeUsers: null, 
   };
 };
+
 const Users: React.FC = () => {
   const [config, setConfig] = React.useState(getSearchParams());
   const [activeUser, setActiveUser] = React.useState<any>(undefined);
+
+
+  React.useEffect(() => {
+      CometChat.getUser(config.chatUser).then(setActiveUser)
+      .catch(console.error);
+    }, [config.chatUser]);
 
 
   React.useEffect(() => {
@@ -70,8 +70,8 @@ const Users: React.FC = () => {
          hideUserStatus={config.hideUserStatus}
          hideSearch={config.hideSearch}
          selectionMode={config.selectionMode}
-         showSectionHeader={config.showSectionHeader}
          activeUser={activeUser}
+  
 
        
       />
