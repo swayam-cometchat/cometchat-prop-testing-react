@@ -2,11 +2,9 @@ import React from "react";
 import {
   CalendarObject,
   CometChatConversations,
-  CometChatOption,
   SelectionMode,
 } from "@cometchat/chat-uikit-react";
 import { CometChat } from "@cometchat/chat-sdk-javascript";
-import icon from '../assets/nudge-icon.png';
 const getSearchParams = () => {
   const params = new URLSearchParams(window.location.search);
 
