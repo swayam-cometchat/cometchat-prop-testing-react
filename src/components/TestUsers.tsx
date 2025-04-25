@@ -1,19 +1,19 @@
 import React, { act } from "react";
-import { CometChatUsers, SelectionMode  } from "@cometchat/chat-uikit-react";
+import { CometChatUsers, SelectionMode } from "@cometchat/chat-uikit-react";
 import { CometChat }from "@cometchat/chat-sdk-javascript";
 const getSearchParams = () => {
-  const params = new URLSearchParams(window.location.search);
-
-  const selectionModeParam = params.get("selectionMode");
-   
-   const chatUser = params.get("chatUser");
-  
+const params = new URLSearchParams(window.location.search);
+const selectionModeParam = params.get("selectionMode");
+const chatUser = params.get("chatUser");
+const searchKeyword = params.get("searchKeyword") || " ";
   return {
     hideUserStatus: params.get("hideUserStatus") === "true",
     hideUsertype: params.get("hideUsertype") === "true",
     hideSearch: params.get("hideSearch") === "true",
     headerView: params.get("headerView") === "true",
-    chatUser: chatUser,
+    showSectionHeader: params.get("showSectionHeader") === "true",
+    searchKeyword:params.get(searchKeyword),
+    chatUser: chatUser, 
     selectionMode:
       selectionModeParam === "multiple"
         ? SelectionMode.multiple
@@ -71,6 +71,8 @@ const Users: React.FC = () => {
          hideSearch={config.hideSearch}
          selectionMode={config.selectionMode}
          activeUser={activeUser}
+         showSectionHeader={config.showSectionHeader}
+        searchKeyword={config.searchKeyword ?? " "}
   
 
        

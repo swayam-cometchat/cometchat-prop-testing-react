@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:5173'; // Change if needed
+const baseUrl = 'http://localhost:5173'; 
 
 describe('User and Group selection opens chat', () => {
   beforeEach(() => {
