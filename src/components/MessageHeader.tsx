@@ -7,7 +7,7 @@ const MessageHeader = () => {
   return (
     <>
       {/* Render the user and group lists */}
-      <CometChatUsers onUserClick={(user: User) => setSelectedChat(user)} />
+      <CometChatUsers onUserClick={(user:"") => setSelectedChat(user)} />
       <CometChatGroups onItemClick={(group: Group) => setSelectedChat(group)} />
 
       {/* Conditionally render the chat screen */}
