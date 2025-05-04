@@ -1,30 +1,56 @@
-const baseUrl = 'http://localhost:5173'; 
+const baseUrl = 'http://localhost:5173';
 
-describe('User and Group selection opens chat', () => {
+describe('MessageHeader component: MessageHeader prop testing', () => {  
+
   beforeEach(() => {
-    cy.visit(baseUrl);
-    cy.wait(2000); // wait for CometChat to load
+    cy.wait(2000);
   });
 
-  it('should open chat when a user is clicked', () => {
-    cy.get('.cometchat-list-item') // list items are users
-      .first()
-      .click();
-
-    // Expect Chat area to contain text like "Chat with:"
-    cy.contains('Chat with:').should('exist');
+  afterEach(() => {
+    cy.wait(3000);
   });
 
-  it('should open chat when a group is clicked', () => {
-    // Navigate to group list (if in a tab/panel)
-    cy.get('.cometchat-tabs__item') // assuming group tab exists
-      .contains('Groups')
-      .click();
+ 
+  it('should hide user status when hideUserStatus=true', () => {
+    cy.visit(`${baseUrl}?hideUserStatus=true`);
+    cy.wait(2000);
 
-    cy.get('.cometchat-list-item') // group list items
-      .first()
-      .click();
+    cy.get('.cometchat-list-item').each(($item) => {
+        const itemId = $item.attr('id');
+        if (itemId && itemId.startsWith('user_')) {
+            cy.wrap($item)
+                .find('.cometchat-list-item__status-icon')
+                .should('not.be.visible');
+        }
+    });
+});
 
-    cy.contains('Chat with:').should('exist');
+
+it('should show group type when hideUserStatus=false', () => {
+    cy.visit(`${baseUrl}?hideUserStatus=false`);
+  
+
+    cy.get('.cometchat-list-item').each(($item) => {
+        const itemId = $item.attr('id');
+        if (itemId && itemId.startsWith('user_')) {
+            cy.wrap($item)
+                .find('.cometchat-status-indicator.cometchat-list-item__status')
+                .should('exist');
+        }
+    });
+});
+
+
+  
+  it('should hide receipts when showConversationSummaryButton=true', () => {
+    cy.visit(`${baseUrl}?showConversationSummaryButton=true`);
+    cy.wait(2000);
+    cy.get('.cometchat-message-header__conversation-summary-button > .cometchat > .cometchat-button > .cometchat-button__icon-default').should('exist');
+  });
+  
+  it('should hide receipts when showConversationSummaryButton=false', () => {
+    cy.visit(`${baseUrl}?showConversationSummaryButton=false`)
+    cy.get('.cometchat-message-header__conversation-summary-button > .cometchat > .cometchat-button > .cometchat-button__icon-default').should('not.exist');
+    cy.wait(2000);
   });
 });
