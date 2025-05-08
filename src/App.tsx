@@ -1,12 +1,29 @@
 import React from "react";
-import TestMessageHeader from "./components/TestMessageHeader";
+import { CometChatMessageComposer } from "@cometchat/chat-uikit-react";
+
 const App: React.FC = () => {
   return (
-    <div style={{ height: "100vh", width: "100vw" }}>
-
-      <TestMessageHeader/>
-   
-          </div>
+    <div style={{
+      height: "100vh",
+      width: "80vw",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      margin: 60
+    }}>
+      <CometChatMessageComposer
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      />
+     </div>
   );
 };
 
