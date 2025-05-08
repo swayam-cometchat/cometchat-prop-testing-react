@@ -1,5 +1,5 @@
 import React from "react";
-import { CometChatMessageHeader } from "@cometchat/chat-uikit-react";
+import TestMessageHeaderHeader from "./components/TestMessageHeader";
 const App: React.FC = () => {
   return (
     <div style={{
@@ -10,16 +10,9 @@ const App: React.FC = () => {
       alignItems: "center",
       margin: 60
     }}>
-      <CometChatMessageHeader
+      <TestMessageHeaderHeader
         
-      
-      
-      
-      
-      
-      
-      
-      
+    
       
       />
      </div>
