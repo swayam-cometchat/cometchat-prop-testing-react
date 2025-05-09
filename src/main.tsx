@@ -7,11 +7,10 @@ import {
   UIKitSettingsBuilder,
 } from '@cometchat/chat-uikit-react';
 
-// Your CometChat credentials
 export const COMETCHAT_CONSTANTS = {
-  APP_ID: '2649604c7fc34a0b',
+  APP_ID: '2658082094ba2b89',
   REGION: 'us',
-  AUTH_KEY: 'f19f572789e80ba241c2ff9220bbd9829eb376d0',
+  AUTH_KEY: '18311d0f0e64f3e4dd32054a44d17ed5263de2ec',
 };
 
 const UID = 'cometchat-uid-1'; 

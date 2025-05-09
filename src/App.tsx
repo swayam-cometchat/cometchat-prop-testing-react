@@ -1,21 +1,21 @@
-
 import React from "react";
-import TestGroups from "./components/TestGroups";
-import TestUsers from "./components/TestUsers";
-
-
-//import Users from "./components/Users";
-
-
-
-//import TestConversations from "./components/TestConversations";
-
+import TestMessageHeaderHeader from "./components/TestMessageHeader";
 const App: React.FC = () => {
   return (
-    <div style={{ height: "100vh", width: "100vw" }}>
-      <TestUsers/>
-      <TestGroups/>
-    </div>
+    <div style={{
+      height: "100vh",
+      width: "80vw",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      margin: 60
+    }}>
+      <TestMessageHeaderHeader
+        
+    
+      
+      />
+     </div>
   );
 };
 
