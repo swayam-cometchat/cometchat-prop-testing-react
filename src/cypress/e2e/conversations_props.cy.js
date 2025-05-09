@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:5173';
+const baseUrl = 'http://localhost:5173/';
 
 describe('CometChatConversations prop testing', () => {
 
@@ -43,6 +43,7 @@ describe('CometChatConversations prop testing', () => {
 
       
     it('should hide user status when hideUserStatus=true', () => {
+        
         cy.visit(`${baseUrl}?hideUserStatus=true`);
         waitForConversations();
 
