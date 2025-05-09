@@ -3,7 +3,7 @@ const baseUrl = 'http://localhost:5173';
 describe('MessageHeader component: MessageHeader prop testing', () => {  
 
   beforeEach(() => {
-    cy.wait(2000);
+    cy.visit(`${baseUrl}?component=messageHeader`, { failOnStatusCode: false });
   });
 
   afterEach(() => {
@@ -12,7 +12,7 @@ describe('MessageHeader component: MessageHeader prop testing', () => {
 
  
   it('should hide user status when hideUserStatus=true', () => {
-    cy.visit(`${baseUrl}?hideUserStatus=true`);
+    cy.visit(`${baseUrl}?component=messageHeader&hideUserStatus=true`);
     cy.wait(2000);
 
     cy.get('.cometchat-list-item').each(($item) => {
@@ -27,7 +27,7 @@ describe('MessageHeader component: MessageHeader prop testing', () => {
 
 
 it('should show group type when hideUserStatus=false', () => {
-    cy.visit(`${baseUrl}?hideUserStatus=false`);
+    cy.visit(`${baseUrl}?component=messageHeader&hideUserStatus=false`);
   
 
     cy.get('.cometchat-list-item').each(($item) => {
@@ -43,13 +43,13 @@ it('should show group type when hideUserStatus=false', () => {
 
   
   it('should hide receipts when showConversationSummaryButton=true', () => {
-    cy.visit(`${baseUrl}?showConversationSummaryButton=true`);
+    cy.visit(`${baseUrl}?component=messageHeader&showConversationSummaryButton=true`);
     cy.wait(2000);
     cy.get('.cometchat-message-header__conversation-summary-button > .cometchat > .cometchat-button > .cometchat-button__icon-default').should('exist');
   });
   
   it('should hide receipts when showConversationSummaryButton=false', () => {
-    cy.visit(`${baseUrl}?showConversationSummaryButton=false`)
+    cy.visit(`${baseUrl}?component=messageHeader&showConversationSummaryButton=false`)
     cy.get('.cometchat-message-header__conversation-summary-button > .cometchat > .cometchat-button > .cometchat-button__icon-default').should('not.exist');
     cy.wait(2000);
   });

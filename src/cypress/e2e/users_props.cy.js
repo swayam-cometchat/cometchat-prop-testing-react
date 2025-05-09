@@ -8,7 +8,7 @@ const waitForUsers = () => {
 describe('CometChatUsers prop testing', () => {
 
   beforeEach(() => {
-    cy.wait(2000);
+    cy.visit(`${baseUrl}?component=users`, { failOnStatusCode: false });
   });
 
   afterEach(() => {
@@ -16,7 +16,7 @@ describe('CometChatUsers prop testing', () => {
   });
 
   it('should hide users Search-Bar when hideSearch=true', () => {
-    cy.visit(`${baseUrl}?hideSearch=true`);
+    cy.visit(`${baseUrl}?component=users&hideSearch=true`);
     waitForUsers();
 
     cy.get('.cometchat-list-item').each(($item) => {
@@ -30,7 +30,7 @@ describe('CometChatUsers prop testing', () => {
   });
 
   it('should show users Search-Bar when hideSearch=false', () => {
-    cy.visit(`${baseUrl}?hideSearch=false`);
+    cy.visit(`${baseUrl}?component=users&hideSearch=false`);
     waitForUsers();
 
     cy.get('.cometchat-list-item').each(($item) => {
@@ -44,7 +44,7 @@ describe('CometChatUsers prop testing', () => {
   });
 
   it('should hide users status when hideUserStatus=true', () => {
-    cy.visit(`${baseUrl}?hideUserStatus=true`);
+    cy.visit(`${baseUrl}?component=users&hideUserStatus=true`);
     waitForUsers();
 
     cy.get('.cometchat-list-item').each(($item) => {
@@ -58,7 +58,7 @@ describe('CometChatUsers prop testing', () => {
   });
    
   it('should show the user type when hideUserStatus=false', () =>  {
-    cy.visit(`${baseUrl}?hideUserStatus=false`);
+    cy.visit(`${baseUrl}?component=users&hideUserStatus=false`);
     waitForUsers;
 
     cy.get('.cometchat-list-item').each(($item) => {
@@ -74,26 +74,26 @@ describe('CometChatUsers prop testing', () => {
 
     it('should set the active user with activeUser={chatUser}', () => {
       const activeUid = 'cometchat-uid-3';
-      cy.visit(`${baseUrl}?chatUser=${activeUid}`);
+      cy.visit(`${baseUrl}?component=users&chatUser=${activeUid}`);
       cy.wait(2000); 
       waitForUsers();
       });
 
   it('should enable single selection mode', () => {
-    cy.visit(`${baseUrl}?selectionMode=single`);
+    cy.visit(`${baseUrl}?component=users&selectionMode=single`);
     waitForUsers();
     cy.get('.cometchat-radiobutton__selected').should('exist').first().click();
 });
 
 it('should disable all selection options', () => {
-    cy.visit(`${baseUrl}?selectionMode=none`);
+    cy.visit(`${baseUrl}?component=users&selectionMode=none`);
     waitForUsers();
     cy.get('.cometchat-checkbox__checkmark').should('not.exist');
     cy.get('.cometchat-radiobutton__selected').should('not.exist');
 });
 
     it('should enable multiple selection mode', () => {
-      cy.visit(`${baseUrl}?selectionMode=multiple`);
+      cy.visit(`${baseUrl}?component=users&selectionMode=multiple`);
        waitForUsers();
       cy.get('.cometchat-checkbox__checkmark').should('exist').first().click();
       const indexeToSelect = [1, 2, 3];
@@ -103,14 +103,14 @@ it('should disable all selection options', () => {
   });
 
    it ('should hide sectionHeader with showSectionHeader=false', () =>{
-    cy.visit(`${baseUrl}?showSectionHeader=false`);
+    cy.visit(`${baseUrl}?component=users&showSectionHeader=false`);
     waitForUsers();
     cy.get('.cometchat-list__section > .cometchat-list__section-header').should("not.exist");
 
   });
 
   it ('should enable sectionHeader with showSectionHeader=true', () =>{
-    cy.visit(`${baseUrl}?showSectionHeader=true`);
+    cy.visit(`${baseUrl}?component=users&showSectionHeader=true`);
     waitForUsers();
     cy.get('.cometchat-list__section > .cometchat-list__section-header').should("exist");
 
@@ -119,7 +119,7 @@ it('should disable all selection options', () => {
  
 
   it('should enable the searchKeyword with searchKeyword=Alice', () =>{
-    cy.visit(`${baseUrl}`);
+    cy.visit(`${baseUrl}?component=users`);
     cy.wait(2000);
     cy.get('.cometchat-users > [style="width: 100%; height: 100%;"] > .cometchat-list > .cometchat-list__header > .cometchat-list__header-search-bar > .cometchat > .cometchat-search-bar').type("Alice");
     cy.get('.cometchat-users__empty-state-view').should("be.visible");

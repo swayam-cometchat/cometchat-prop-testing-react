@@ -6,6 +6,7 @@ describe('CometChatConversations prop testing', () => {
         cy.get('.cometchat-list-item', { timeout: 10000 }).should('exist');
     };
     beforeEach(() => {
+        cy.visit(`${baseUrl}?component=conversations`, { failOnStatusCode: false });
         cy.wait(1000);
     });
 
@@ -44,7 +45,7 @@ describe('CometChatConversations prop testing', () => {
       
     it('should hide user status when hideUserStatus=true', () => {
         
-        cy.visit(`${baseUrl}?hideUserStatus=true`);
+        cy.visit(`${baseUrl}?component=conversations&hideUserStatus=true`);
         waitForConversations();
 
         cy.get('.cometchat-list-item').each(($item) => {
@@ -59,7 +60,7 @@ describe('CometChatConversations prop testing', () => {
 
 
     it('should show group type when hideUserStatus=false', () => {
-        cy.visit(`${baseUrl}?hideUserStatus=false`);
+        cy.visit(`${baseUrl}?component=conversations&hideUserStatus=false`);
         waitForConversations();
 
         cy.get('.cometchat-list-item').each(($item) => {
@@ -75,7 +76,7 @@ describe('CometChatConversations prop testing', () => {
 
 
     it('should hide group type when hideGroupType=true', () => {
-        cy.visit(`${baseUrl}?hideGroupType=true`);
+        cy.visit(`${baseUrl}?component=conversations&hideGroupType=true`);
         waitForConversations();
 
         cy.get('.cometchat-list-item').each(($item) => {
@@ -90,7 +91,7 @@ describe('CometChatConversations prop testing', () => {
 
 
     it('should show group type when hideGroupType=false', () => {
-        cy.visit(`${baseUrl}?hideGroupType=false`);
+        cy.visit(`${baseUrl}?component=conversations&hideGroupType=false`);
         waitForConversations();
 
         cy.get('.cometchat-list-item').each(($item) => {
@@ -107,31 +108,31 @@ describe('CometChatConversations prop testing', () => {
 
 
     it('should hide receipts when hideReceipts=true', () => {
-        cy.visit(`${baseUrl}?hideReceipts=true`);
+        cy.visit(`${baseUrl}?component=conversations&hideReceipts=true`);
         waitForConversations();
         cy.get('.cometchat-receipts').should('not.exist');
     });
 
     it('should show receipts when hideReceipts=false', () => {
-        cy.visit(`${baseUrl}?hideReceipts=false`);
+        cy.visit(`${baseUrl}?component=conversations&hideReceipts=false`);
         waitForConversations();
         cy.get('.cometchat-receipts').should('exist');
     });
     it('should enable multiple selection mode', () => {
-        cy.visit(`${baseUrl}?selectionMode=multiple`);
+        cy.visit(`${baseUrl}?component=conversations&selectionMode=multiple`);
         waitForConversations();
         cy.get('.cometchat-checkbox__checkmark').should('exist').first().click();
         cy.get('.cometchat-checkbox__checkmark').should('exist').eq(1).click();
     });
 
     it('should enable single selection mode', () => {
-        cy.visit(`${baseUrl}?selectionMode=single`);
+        cy.visit(`${baseUrl}?component=conversations&selectionMode=single`);
         waitForConversations();
         cy.get('.cometchat-radiobutton__selected').should('exist').first().click();
     });
 
     it('should disable all selection options', () => {
-        cy.visit(`${baseUrl}?selectionMode=none`);
+        cy.visit(`${baseUrl}?component=conversations&selectionMode=none`);
         waitForConversations();
         cy.get('.cometchat-checkbox__checkmark').should('not.exist');
         cy.get('.cometchat-radiobutton__selected').should('not.exist');
@@ -139,7 +140,7 @@ describe('CometChatConversations prop testing', () => {
 
 
     it('should hide delete option when hideDeleteConversation=true', () => {
-        cy.visit(`${baseUrl}?hideDeleteConversation=true`);
+        cy.visit(`${baseUrl}?component=conversations&hideDeleteConversation=true`);
         waitForConversations();
         cy.get('.cometchat-list-item').first().trigger('mouseover');
         cy.wait(2000);
@@ -148,7 +149,7 @@ describe('CometChatConversations prop testing', () => {
 
 
     it('should not hide delete option when hideDeleteConversation=false', () => {
-        cy.visit(`${baseUrl}?hideDeleteConversation=false`);
+        cy.visit(`${baseUrl}?component=conversations&hideDeleteConversation=false`);
         waitForConversations();
         cy.get('.cometchat-list-item').first().trigger('mouseover');
         cy.wait(2000);
@@ -156,13 +157,13 @@ describe('CometChatConversations prop testing', () => {
     });
 
     it('should render only 5 conversation list items with setLimit(5)', () => {
-        cy.visit(`${baseUrl}?limit=5`);
+        cy.visit(`${baseUrl}?component=conversations&limit=5`);
         cy.get('.cometchat-list-item', { timeout: 10000 })
             .should('have.length', 5);
     });
 
     it('should display last message time in "DD MMM, hh:mm A" format', () => {
-        cy.visit(`${baseUrl}?customDateFormat=true`);
+        cy.visit(`${baseUrl}?component=conversations&customDateFormat=true`);
         cy.get('.cometchat-list-item', { timeout: 10000 }).should('exist');
 
         cy.get('.cometchat-date').each(($el) => {
@@ -174,7 +175,7 @@ describe('CometChatConversations prop testing', () => {
     it('should set the active conversation based on query param', () => {
         const activeUid = 'cometchat-uid-2';
       
-        cy.visit(`${baseUrl}?conversationWith=${activeUid}&conversationType=user`);
+        cy.visit(`${baseUrl}?component=conversations&conversationWith=${activeUid}&conversationType=user`);
         waitForConversations();
       
         cy.get('.cometchat-conversations__list-item-active .cometchat-list-item')
@@ -182,7 +183,7 @@ describe('CometChatConversations prop testing', () => {
     });
 
     it('should trigger onItemClick when a conversation is clicked', () => {
-        cy.visit(`${baseUrl}`);
+        cy.visit(`${baseUrl}?component=conversations`);
         waitForConversations();
       
         cy.window().then((win) => {

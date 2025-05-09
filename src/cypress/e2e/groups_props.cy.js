@@ -9,7 +9,7 @@ const waitForGroups = () => {
 describe('CometChatGroups prop testing', () => {
 
   beforeEach(() => {
-    cy.wait(2000);
+    cy.visit(`${baseUrl}?component=groups`, { failOnStatusCode: false });
   });
 
   afterEach(() => {
@@ -17,7 +17,7 @@ describe('CometChatGroups prop testing', () => {
   });
 
   it('should hide group Search-Bar when hideSearch=true', () => {
-    cy.visit(`${baseUrl}?hideSearch=true`);
+    cy.visit(`${baseUrl}?component=groups&hideSearch=true`);
     waitForGroups();
 
     cy.get('.cometchat-list-item').each(($item) => {
@@ -31,7 +31,7 @@ describe('CometChatGroups prop testing', () => {
   });
 
   it('should hide group Search-Bar when hideSearch=false', () => {
-    cy.visit(`${baseUrl}?hideSearch=false`);
+    cy.visit(`${baseUrl}?component=groups&hideSearch=false`);
     waitForGroups();
 
     cy.get('.cometchat-list-item').each(($item) => {
@@ -45,7 +45,7 @@ describe('CometChatGroups prop testing', () => {
   });
 
   it('should hide group type when hideGroupType=true', () => {
-    cy.visit(`${baseUrl}?hideGroupType=true`);
+    cy.visit(`${baseUrl}?component=groups&hideGroupType=true`);
     waitForGroups();
 
     cy.get('.cometchat-list-item').each(($item) => {
@@ -59,7 +59,7 @@ describe('CometChatGroups prop testing', () => {
   });
    
   it('should show the group type when hideGroupType=false', () =>  {
-    cy.visit(`${baseUrl}?hideGroupType=false`);
+    cy.visit(`${baseUrl}?component=groups&hideGroupType=false`);
     waitForGroups;
 
     cy.get('.cometchat-list-item').each(($item) => {
@@ -75,26 +75,26 @@ describe('CometChatGroups prop testing', () => {
 
     it('should set the active group with 	activeGroup={chatGroup}', () => {
       const activeGuid = 'cometchat-guid-1';
-      cy.visit(`${baseUrl}?chatGroup=${activeGuid}`);
+      cy.visit(`${baseUrl}?component=groups&chatGroup=${activeGuid}`);
       cy.wait(2000); 
       waitForGroups();
       });
 
   it('should enable single selection mode', () => {
-    cy.visit(`${baseUrl}?selectionMode=single`);
+    cy.visit(`${baseUrl}?component=groups&selectionMode=single`);
     waitForGroups();
     cy.get('.cometchat-radiobutton__selected').should('exist').first().click();
 });
 
 it('should disable all selection options', () => {
-    cy.visit(`${baseUrl}?selectionMode=none`);
+    cy.visit(`${baseUrl}?component=groups&selectionMode=none`);
     waitForGroups();
     cy.get('.cometchat-checkbox__checkmark').should('not.exist');
     cy.get('.cometchat-radiobutton__selected').should('not.exist');
 });
 
     it('should enable multiple selection mode', () => {
-      cy.visit(`${baseUrl}?selectionMode=multiple`);
+      cy.visit(`${baseUrl}?component=groups&selectionMode=multiple`);
        waitForGroups();
       cy.get('.cometchat-checkbox__checkmark').should('exist').first().click();
       cy.get('.cometchat-checkbox__checkmark').should('exist').eq(4).click();
