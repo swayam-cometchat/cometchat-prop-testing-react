@@ -1,8 +1,8 @@
 import React from "react";
-import TestMessageHeader from "./components/TestMessageHeader";
-import TestConversations from "./components/TestConversations";
-import TestUsers from "./components/TestUsers";
-import TestGroups from "./components/TestGroups";
+import TestConversations from "./components/ConversationsTest/TestConversations";
+import TestUsers from "./components/UsersTest/TestUsers";
+import TestGroups from "./components/GroupsTest/TestGroups";
+import TestMessageHeader from "./components/MessageHeaderTest/TestMessageHeader";
 
 const App: React.FC = () => {
   const queryParams = new URLSearchParams(window.location.search);
