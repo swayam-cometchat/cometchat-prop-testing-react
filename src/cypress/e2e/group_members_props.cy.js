@@ -1,6 +1,4 @@
-const { CometChatGroups } = require("@cometchat/chat-uikit-react");
-
-const baseUrl = 'http://localhost:5173/';
+const baseUrl = 'http://localhost:5174/';
 
 const waitForGroupMembers = () => {
   cy.get('.cometchat-group-members__list-item ', { timeout: 10000 }).should('exist');
@@ -10,6 +8,7 @@ describe('CometChatGroupMembers props testing', () => {
 
   beforeEach(() => {
     cy.wait(2000);
+    
   });
 
   afterEach(() => {
@@ -57,10 +56,12 @@ describe('CometChatGroupMembers props testing', () => {
 it('should show hideKickMemberOption with hideKickMemberOption=true', () => {
   cy.visit(`${baseUrl}?hideKickMemberOption=true`);
   waitForGroupMembers();
+
     cy.get(".cometchat-list-item__body").first().trigger('mouseover') 
 .log('Triggered mouseover on user');
 cy.wait(2000);
 cy.get('.cometchat-menu-list__sub-menu-icon').click();
+cy.wait(2000);
 cy.get('#kick > .cometchat-menu-list__sub-menu-list-item').should('not.exist').log("Verified that the 'kick' option does not exist");
 
 });
